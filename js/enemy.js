@@ -9,9 +9,9 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -202;
-    this.y = getRandomIntInclusive(1, 3) * 75; // 83 is the height of the blocks
-    this.speed = getRandomIntInclusive(2000, 8000); // time in miliseconds to crossing the screen
+    this.x = -101;
+    this.y = (getRandomIntInclusive(1, 3) * 83) - 25; // 83 is the height of the blocks
+    this.speed = 2000; // time in miliseconds to crossing the screen
 };
 
 /**
@@ -23,10 +23,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    var newXPosition = this.x + (((ctx.canvas.width + 101) / (this.speed / 1000)) * dt);
-    if (newXPosition > (ctx.canvas.width + 101)) {
-        // if exceeds the screen width, return to zero
-        newXPosition = 0;
+    var newXPosition = this.x + ((ctx.canvas.width / (this.speed / 1000)) * dt);
+    if (newXPosition > ctx.canvas.width) {
+        // if exceeds the screen width, return to initial position
+        newXPosition = -101;
     }
     this.x = newXPosition;
 
