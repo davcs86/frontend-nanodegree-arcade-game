@@ -5,19 +5,19 @@ Project #3 for Udacity's front-end web developer nanodegree program by davcs86.
 ## Usage
 
 1. Clone the project source code
-```
-git clone https://github.com/davcs86/frontend-nanodegree-arcade-game.git
-```
+    ```
+    git clone https://github.com/davcs86/frontend-nanodegree-arcade-game.git
+    ```
 
 2. Enter into the directory
-```
-cd frontend-nanodegree-arcade-game
-```
+    ```
+    cd frontend-nanodegree-arcade-game
+    ```
 
 3. Open index.html in a browser (eg. in linux)
-```
-google-chrome ./index.html
-```
+    ```
+    google-chrome ./index.html
+    ```
 
 ## How to play
 
