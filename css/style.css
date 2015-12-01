@@ -1,3 +1,9 @@
 body {
     text-align: center;
 }
+
+.rules {
+    margin: 0 auto;
+    width: 505px;
+    text-align: left;
+}

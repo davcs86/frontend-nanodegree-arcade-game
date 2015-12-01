@@ -1,11 +1,6 @@
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-var allEnemies = [ new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy() ];
-var player = new Player();
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -13,8 +8,7 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
-    player.handleInput(allowedKeys[e.keyCode]);
+    engine.player.handleInput(allowedKeys[e.keyCode]);
 });
 
 // Returns a random integer between min (included) and max (included)
@@ -22,4 +16,10 @@ document.addEventListener('keyup', function(e) {
 // taken from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Convert seconds to hh:mm:ss format
+// taken from Stackoverflow: http://stackoverflow.com/a/29618671/2423859
+function toTimeString(seconds) {
+    return (new Date(seconds * 1000)).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
 }
