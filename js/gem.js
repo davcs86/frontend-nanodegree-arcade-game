@@ -1,52 +1,64 @@
 /**
-* @description Represents a gem to give more time to the user
+* Represents a gem to give more time to the user
 * @constructor
+*
+* @param {object} engine - engine reference
+*
 */
 var Gem = function(engine) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+    /**
+    * Reference to engine owner, to use global variable "engine"
+    */
     this.engine = engine;
+    /**
+    * Declare the variables needed, then call init() method.
+    */
     this.sprite;
     this.timeToAdd;
     this.expiresIn;
     this.x;
     this.y;
-    this.reset();
+    this.init();
 };
 
 /**
- * @description Update the gem time, required method for game.
+ * Update the gem expiration time, then redraw it if the gem already expired.
  *
  * @param {integer} dt - a time delta between ticks
  */
 Gem.prototype.update = function(dt) {
-    // update the gem expiresIn
     this.expiresIn -= dt;
-    //console.log(this.expiresIn);
     if (this.expiresIn <= 0.0) {
-        this.reset();
+        this.init();
     }
 };
 
-Gem.prototype.reset = function(){
-    var gemSettings = {
-        1: {
+/*
+* Sets a new initial state for all the gem variables
+*/
+Gem.prototype.init = function(){
+    /**
+    * Array of the possible gems and their settings
+    */
+    var gemSettings = [
+        {
             sprite: 'images/Gem%20Blue.png',
             timeToAdd: 30, // 30 seconds
             expiresIn: 15
-        },
-        2: {
+        }, {
             sprite: 'images/Gem%20Green.png',
             timeToAdd: 20, // 20 seconds
             expiresIn: 10
-        },
-        3: {
+        }, {
             sprite: 'images/Gem%20Orange.png',
             timeToAdd: 10, // 10 seconds
             expiresIn: 5
         }
-    };
-    var randomGemIndex = getRandomIntInclusive(1,3),
+    ];
+    /**
+    * Set randomly the kind of gem and its position (row and column)
+    */
+    var randomGemIndex = getRandomIntInclusive(0, gemSettings.length-1),
         randomRow = getRandomIntInclusive(1,3),
         randomCol = getRandomIntInclusive(0,4),
         newGemSettings = gemSettings[randomGemIndex];
@@ -58,14 +70,17 @@ Gem.prototype.reset = function(){
     this.y = (randomRow * 83) - 25;
 };
 
-Gem.prototype.doCollide = function(){
-    //update game timer
-    this.engine.changeTime(this.timeToAdd);
-    this.reset();
-};
 /**
- * @description Draw the gem on the screen, required method for game
- */
+* Update game timer. Then call the init() method of the gem in order to redraw it.
+*/
+Gem.prototype.doCollide = function(){
+    this.engine.changeTime(this.timeToAdd);
+    this.init();
+};
+
+/**
+* Draw the gem on the screen, required method for game
+*/
 Gem.prototype.render = function() {
     this.engine.ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
